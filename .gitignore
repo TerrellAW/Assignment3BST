@@ -1,0 +1,16 @@
+# Build Results
+[Bb]in/
+
+# Eclipse files
+.settings/
+.metadata/
+
+# JetBrains IDE files
+.idea/
+*.iml
+
+# Windows files
+*.ini
+
+# Swap files
+*.swp
