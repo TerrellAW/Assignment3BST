@@ -7,10 +7,37 @@ import implementations.BSTreeNode;
 
 /**
  *
+ * @param <E> The type of elements this list holds.
  */
 public class BSTree<E extends Comparable<? super E>>
 	implements BSTreeADT<E>
 {
+	// TODO: Add underlying data structure(s)
+
+	/**
+	 * Root node of <code>BSTree</code>.
+	 */
+	BSTreeNode<E> root;
+	/**
+	 * Height/layers of <code>BSTree</code>.
+	 */
+	int height;
+	/**
+	 * Count for amount of elements in <code>BSTree</code>.
+	 */
+	int count;
+
+	/**
+	 * Constructs the Binary Search Tree.
+	 *
+	 * @return Instance of the <code>BSTree</code> class.
+	 */
+	public BSTree() {
+		this.root = null;
+		this.height = 0;
+		this.count = 0;
+	}
+
 	/**
 	 * The node at the root of the Binary Search Tree will be returned.
 	 * 
@@ -20,7 +47,10 @@ public class BSTree<E extends Comparable<? super E>>
 	public BSTreeNode<E> getRoot()
 			throws NullPointerException
 	{
-
+		if (this.root == null) {
+			throw new NullPointerException("No root node found");
+		}
+		return this.root;
 	}
 
 	/**
@@ -31,7 +61,7 @@ public class BSTree<E extends Comparable<? super E>>
 	 */
 	public int getHeight()
 	{
-
+		return this.height;
 	}
 
 	/**
@@ -42,7 +72,7 @@ public class BSTree<E extends Comparable<? super E>>
 	 */
 	public int size()
 	{
-
+		return this.count;
 	}
 
 	/**
@@ -52,7 +82,10 @@ public class BSTree<E extends Comparable<? super E>>
 	 */
 	public boolean isEmpty()
 	{
-
+		if (this.count == 0 || this.root == null) {
+			return true;
+		}
+		return false;
 	}
 
 	/**
@@ -60,7 +93,10 @@ public class BSTree<E extends Comparable<? super E>>
 	 */
 	public void clear()
 	{
-
+		// TODO: Reinitialize underlying data structure(s)
+		this.root = null;
+		this.height = 0;
+		this.count = 0;
 	}
 
 	/**
