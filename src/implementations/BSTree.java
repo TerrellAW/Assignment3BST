@@ -196,17 +196,17 @@ public class BSTree<E extends Comparable<? super E>>
 			rightRotate(root); // TODO: Implement this
 
 		// Right right
-		if (balance < -1 && newEntry.compareTo(root.value) > 0)
+		else if (balance < -1 && newEntry.compareTo(root.value) > 0)
 			leftRotate(root); // TODO: Implement this
 
 		// Left right
-		if (balance > 1 && newEntry.compareTo(root.left.value) > 0) {
+		else if (balance > 1 && newEntry.compareTo(root.left.value) > 0) {
 			leftRotate(root.left); // TODO: Implement this
 			rightRotate(root); // TODO: Implement this
 		}
 
 		// Right left
-		if (balance < -1 && newEntry.compareTo(root.right.value) < 0) {
+		else if (balance < -1 && newEntry.compareTo(root.right.value) < 0) {
 			rightRotate(root.right); // TODO: Implement this
 			leftRotate(root); // TODO: Implement this
 		}
