@@ -160,7 +160,7 @@ public class BSTree<E extends Comparable<? super E>>
 	 * @throws NullPointerException if the element being passed in is null
 	 */
 	public boolean add( E newEntry )
-			throws NullPointerException
+			throws NullPointerException // TODO: Redo all of this for when root.left/right are not empty
 	{
 		// Null pointer if newEntry is null
 		if (newEntry == null)
