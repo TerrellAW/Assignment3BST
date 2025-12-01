@@ -140,7 +140,7 @@ public class BSTree<E extends Comparable<? super E>>
 	/**
 	 *
 	 */
-	private void rightRotate(BSTreeNode node) 
+	private void rightRotate(BSTreeNode<E> node) 
 	{
 		// TODO
 	}
@@ -148,7 +148,7 @@ public class BSTree<E extends Comparable<? super E>>
 	/**
 	 *
 	 */
-	private void leftRotate(BSTreeNode node) 
+	private void leftRotate(BSTreeNode<E> node) 
 	{
 		// TODO
 	}
@@ -178,7 +178,7 @@ public class BSTree<E extends Comparable<? super E>>
 
 		// Create root if one does not exist
 		if (isEmpty()) {
-			this.root = new BSTreeNode(newEntry);
+			this.root = new BSTreeNode<E>(newEntry);
 			this.height++;
 			this.count++;
 			return true;
@@ -186,11 +186,11 @@ public class BSTree<E extends Comparable<? super E>>
 
 		// Check if newEntry comes before the value of root
 		if (newEntry.compareTo(root.value) < 0) {
-			root.left = new BSTreeNode(newEntry);
+			root.left = new BSTreeNode<E>(newEntry);
 			this.height++;
 			this.count++;
 		} else if (newEntry.compareTo(root.value) > 0) {
-			root.right = new BSTreeNode(newEntry);
+			root.right = new BSTreeNode<E>(newEntry);
 			this.height++;
 			this.count++;
 		}
