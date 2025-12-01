@@ -6,14 +6,14 @@ import utilities.BSTreeADT;
 import implementations.BSTreeNode;
 
 /**
+ * 
  *
  * @param <E> The type of elements this list holds.
+ * @author TerrellAW
  */
 public class BSTree<E extends Comparable<? super E>>
 	implements BSTreeADT<E>
 {
-	// TODO: Add underlying data structure(s)
-
 	/**
 	 * Root node of <code>BSTree</code>.
 	 */
@@ -76,6 +76,15 @@ public class BSTree<E extends Comparable<? super E>>
 	}
 
 	/**
+	 * Maximum between two integers.
+	 *
+	 * @return larger of two given integers.
+	 */
+	int max(int a, int b) {
+		return (a > b) ? a : b;
+	}
+
+	/**
 	 * Checks if the tree is currently empty.
 	 * 
 	 * @return returns boolean true if the tree is empty otherwise false.
@@ -93,10 +102,10 @@ public class BSTree<E extends Comparable<? super E>>
 	 */
 	public void clear()
 	{
-		// TODO: Reinitialize underlying data structure(s)
 		this.root = null;
 		this.height = 0;
 		this.count = 0;
+		// Garbage collector will deal with the rest
 	}
 
 	/**
@@ -112,7 +121,7 @@ public class BSTree<E extends Comparable<? super E>>
 	public boolean contains( E entry )
 			throws NullPointerException 
 	{
-
+		
 	}
 
 	/**
@@ -129,6 +138,20 @@ public class BSTree<E extends Comparable<? super E>>
 	}
 
 	/**
+	 *
+	 */
+	private void rightRotate(BSTreeNode node) {
+		// TODO
+	}
+
+	/**
+	 *
+	 */
+	private void leftRotate(BSTreeNode node) {
+		// TODO
+	}
+
+	/**
 	 * Adds a new element to the tree according to the natural ordering established
 	 * by the Comparable implementation.
 	 * 
@@ -139,7 +162,56 @@ public class BSTree<E extends Comparable<? super E>>
 	public boolean add( E newEntry )
 			throws NullPointerException
 	{
+		// Null pointer if newEntry is null
+		if (newEntry == null)
+			throw new NullPointerException("Cannot add null to tree");
 
+		// Create root if one does not exist
+		if (isEmpty()) {
+			this.root = new BSTreeNode(newEntry);
+			this.height++;
+			this.count++;
+			return true;
+		}
+
+		// Check if newEntry comes before the value of root
+		if (newEntry.compareTo(root.value) < 0) {
+			root.left = new BSTreeNode(newEntry);
+			this.height++;
+			this.count++;
+		} else if (newEntry.compareTo(root.value) > 0) {
+			root.right = new BSTreeNode(newEntry);
+			this.height++;
+			this.count++;
+		}
+
+		// Raise height of root to max
+		root.height = 1 + max((root.left.height), (root.right.height));
+
+		// Get balance
+		int balance = getBalance(root);
+
+		// Left left
+		if (balance > 1 && newEntry.compareTo(root.value) < 0)
+			rightRotate(root); // TODO: Implement this
+
+		// Right right
+		if (balance < -1 && newEntry.compareTo(root.value) > 0)
+			leftRotate(root); // TODO: Implement this
+
+		// Left right
+		if (balance > 1 && newEntry.compareTo(root.left.value) > 0) {
+			leftRotate(root.left); // TODO: Implement this
+			rightRotate(root); // TODO: Implement this
+		}
+
+		// Right left
+		if (balance < -1 && newEntry.compareTo(root.right.value) < 0) {
+			rightRotate(root.right); // TODO: Implement this
+			leftRotate(root); // TODO: Implement this
+		}
+
+		return true;
 	}
 
 	/**
