@@ -30,5 +30,9 @@ public class BSTreeNode<E>
 		this.height = 1;
 		this.value = value;
 	}
+
+	public E getElement() {
+		return this.value;
+	}
 }
 

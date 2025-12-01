@@ -1,15 +1,15 @@
 package implementations;
 
-import java.io.Serializable;
-
 import utilities.BSTreeADT;
-import implementations.BSTreeNode;
+import utilities.Iterator;
 
 /**
- * 
+ * Class that contains the implementation methods for a Binary Search Tree.
  *
  * @param <E> The type of elements this list holds.
  * @author TerrellAW
+ * @author Estefano Campana
+ * @version 1.0
  */
 public class BSTree<E extends Comparable<? super E>>
 	implements BSTreeADT<E>
@@ -109,19 +109,28 @@ public class BSTree<E extends Comparable<? super E>>
 	}
 
 	/**
-	 * Checks the current tree to see if the element passed in is stored in the
-	 * tree. If the element is found in the tree the method returns true and if the
-	 * element is not in the tree the method returns false.
+	 * Method used to check if the tree contains the value passed.
 	 * 
-	 * @param entry the element to find in the tree
-	 * @return returns boolean true if element is currently in the tree and false if
+	 * @param entry The element to find in the tree
+	 * @return returns True if element is currently in the tree. False if
 	 *         the element is not found in the tree
-	 * @throws NullPointerException if the element being passed in is null
+	 * @throws NullPointerException if the element being passed in is null.
+	 * @author Estefano Campana
+	 * @version 1.0
 	 */
 	public boolean contains( E entry )
 			throws NullPointerException 
 	{
-		
+		if (entry == null) throw new NullPointerException("Cannot search for null values!");
+		Iterator<E> it = preorderIterator();
+		while(it.hasNext()) 
+		{
+			if(it.next().equals(entry)) 
+			{
+				return true;
+			}
+		}
+		return false;
 	}
 
 	/**
@@ -134,31 +143,7 @@ public class BSTree<E extends Comparable<? super E>>
 	public BSTreeNode<E> search( E entry )
 			throws NullPointerException 
 	{
-
-	}
-
-	/**
-	 *
-	 */
-	private void rightRotate(BSTreeNode<E> node) 
-	{
-		// TODO
-	}
-
-	/**
-	 *
-	 */
-	private void leftRotate(BSTreeNode<E> node) 
-	{
-		// TODO
-	}
-
-	/**
-	 *
-	 */
-	private int getBalance(BSTreeNode<E>) 
-	{
-		// TODO
+		return root;
 	}
 
 	/**
@@ -199,51 +184,67 @@ public class BSTree<E extends Comparable<? super E>>
 		root.height = 1 + max((root.left.height), (root.right.height));
 
 		// Get balance
-		int balance = getBalance(root);
+		//int balance = getBalance(root);
 
 		// Left left
-		if (balance > 1 && newEntry.compareTo(root.value) < 0)
-			rightRotate(root); // TODO: Implement this
+		//if (balance > 1 && newEntry.compareTo(root.value) < 0)
+		//	rightRotate(root); // TODO: Implement this
 
 		// Right right
-		else if (balance < -1 && newEntry.compareTo(root.value) > 0)
-			leftRotate(root); // TODO: Implement this
-
+		//else if (balance < -1 && newEntry.compareTo(root.value) > 0)
+		//	leftRotate(root); // TODO: Implement this
 		// Left right
-		else if (balance > 1 && newEntry.compareTo(root.left.value) > 0) {
-			leftRotate(root.left); // TODO: Implement this
-			rightRotate(root); // TODO: Implement this
-		}
+		//else if (balance > 1 && newEntry.compareTo(root.left.value) > 0) {
+		//	leftRotate(root.left); // TODO: Implement this
+		//	rightRotate(root); // TODO: Implement this
+		//}
 
 		// Right left
-		else if (balance < -1 && newEntry.compareTo(root.right.value) < 0) {
-			rightRotate(root.right); // TODO: Implement this
-			leftRotate(root); // TODO: Implement this
-		}
+		//else if (balance < -1 && newEntry.compareTo(root.right.value) < 0) {
+		//	rightRotate(root.right); // TODO: Implement this
+		//	leftRotate(root); // TODO: Implement this
+		//}
 
 		return true;
 	}
 
 	/**
-	 * Removes the smallest element in the tree according to the natural ordering
-	 * established by the Comparable implementation.
+	 * Removes the smallest element in the tree.
 	 * 
 	 * @return the removed element or null if the tree is empty
+	 * @author Estefano Campana
+	 * @version 1.0
 	 */
 	public BSTreeNode<E> removeMin() 
 	{
-
+		if(this.root == null || this.count == 0) return null;
+		BSTreeNode<E> cursor = getRoot();
+		while(cursor != null) 
+		{
+			cursor = cursor.left;
+		}
+		BSTreeNode<E> removed = cursor;
+		cursor = null;
+		return removed;
 	}
 
 	/**
-	 * Removes the largest element in the tree according to the natural ordering
-	 * established by the Comparable implementation.
+	 * Removes the largest element in the tree.
 	 * 
-	 * @return the removed element or null if the tree is empty
+	 * @return the removed element or null if the tree is empty.
+	 * @author Estefano Campana
+	 * @version 1.0
 	 */
 	public BSTreeNode<E> removeMax()
 	{
-
+		if(this.root == null || this.count == 0) return null;
+		BSTreeNode<E> cursor = getRoot();
+		while(cursor.right != null) {
+			cursor = cursor.right;
+		}
+		BSTreeNode<E> removed = cursor;
+		cursor = null;
+		return removed;
 	}
 
 	/**
@@ -251,10 +252,12 @@ public class BSTree<E extends Comparable<? super E>>
 	 * in their natural order.
 	 * 
 	 * @return an iterator with the elements in the natural order
+	 * @author Estefano Campana
+	 * @version 1.0
 	 */
 	public Iterator<E> inorderIterator() 
 	{
-		return new InorderIterator(); // TODO: Implement this
+		return new InorderIterator<E>(getRoot());
 	}
 
 	/**
@@ -262,10 +265,13 @@ public class BSTree<E extends Comparable<? super E>>
 	 * order in such a way as the root element is first.
 	 * 
 	 * @return an iterator with the elements in a root element first order
+	 * @author Estefano Campana
+	 * @version 1.0
+	 * 
 	 */
 	public Iterator<E> preorderIterator() 
 	{
-		return new PreorderIterator(); // TODO: Implement this
+		return new PreorderIterator<E>(getRoot());
 	}
 
 	/**
@@ -273,9 +279,13 @@ public class BSTree<E extends Comparable<? super E>>
 	 * order in such a way as the root element is last.
 	 * 
 	 * @return an iterator with the elements in a root element last order
+	 * @author Estefano Campana
+	 * @version 1.0
 	 */
 	public Iterator<E> postorderIterator() 
 	{
-		return new PostorderIterator(); // TODO: Implement this
+		return new PostorderIterator<E>(getRoot());
 	}
+	
 }
+
