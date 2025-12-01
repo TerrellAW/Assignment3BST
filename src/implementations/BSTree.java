@@ -140,14 +140,24 @@ public class BSTree<E extends Comparable<? super E>>
 	/**
 	 *
 	 */
-	private void rightRotate(BSTreeNode node) {
+	private void rightRotate(BSTreeNode node) 
+	{
 		// TODO
 	}
 
 	/**
 	 *
 	 */
-	private void leftRotate(BSTreeNode node) {
+	private void leftRotate(BSTreeNode node) 
+	{
+		// TODO
+	}
+
+	/**
+	 *
+	 */
+	private int getBalance(BSTreeNode<E>) 
+	{
 		// TODO
 	}
 
@@ -160,7 +170,7 @@ public class BSTree<E extends Comparable<? super E>>
 	 * @throws NullPointerException if the element being passed in is null
 	 */
 	public boolean add( E newEntry )
-			throws NullPointerException // TODO: Redo all of this for when root.left/right are not empty
+			throws NullPointerException // TODO: Redo all of this for when root.left/right are not empty, use iterators
 	{
 		// Null pointer if newEntry is null
 		if (newEntry == null)
@@ -244,7 +254,7 @@ public class BSTree<E extends Comparable<? super E>>
 	 */
 	public Iterator<E> inorderIterator() 
 	{
-
+		return new InorderIterator(); // TODO: Implement this
 	}
 
 	/**
@@ -255,7 +265,7 @@ public class BSTree<E extends Comparable<? super E>>
 	 */
 	public Iterator<E> preorderIterator() 
 	{
-
+		return new PreorderIterator(); // TODO: Implement this
 	}
 
 	/**
@@ -266,6 +276,6 @@ public class BSTree<E extends Comparable<? super E>>
 	 */
 	public Iterator<E> postorderIterator() 
 	{
-
+		return new PostorderIterator(); // TODO: Implement this
 	}
 }
