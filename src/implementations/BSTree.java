@@ -122,14 +122,18 @@ public class BSTree<E extends Comparable<? super E>>
 			throws NullPointerException 
 	{
 		if (entry == null) throw new NullPointerException("Cannot search for null values!");
+		//opens an iterator to search for the value.
 		Iterator<E> it = preorderIterator();
+		//while there is nodes.
 		while(it.hasNext()) 
 		{
+			//if a node equals the value to compare.
 			if(it.next().equals(entry)) 
 			{
 				return true;
 			}
 		}
+		//else return false.
 		return false;
 	}
 
@@ -218,12 +222,16 @@ public class BSTree<E extends Comparable<? super E>>
 	public BSTreeNode<E> removeMin() 
 	{
 		if(this.root == null || this.count == 0) return null;
+		//gets the root
 		BSTreeNode<E> cursor = getRoot();
+		//traverse to the leftmost element.
 		while(cursor != null) 
 		{
 			cursor = cursor.left;
 		}
+		//saves the node
 		BSTreeNode<E> removed = cursor;
+		//deletes the node.
 		cursor = null;
 		return removed;
 	}
@@ -238,11 +246,15 @@ public class BSTree<E extends Comparable<? super E>>
 	public BSTreeNode<E> removeMax()
 	{
 		if(this.root == null || this.count == 0) return null;
+		//gets the root
 		BSTreeNode<E> cursor = getRoot();
-		while(cursor.right != null) {
+		//traverse to the rightmost element.
+		while(cursor != null) {
 			cursor = cursor.right;
 		}
+		//saves the node into a variable.
 		BSTreeNode<E> removed = cursor;
+		//deletes the node.
 		cursor = null;
 		return removed;
 	}
