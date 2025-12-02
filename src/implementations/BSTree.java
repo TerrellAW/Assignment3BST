@@ -200,10 +200,15 @@ public class BSTree<E extends Comparable<? super E>>
 			return root; // Success, root matches
 		}
 
-		if (entry.compareTo(root.value) > 0) // Check if entry is larger than root value
-			return search(root.right, entry); // Look in right branch using overload
+		if (entry.compareTo(root.value) > 0) { // Check if entry is larger than root value
+			if (root.right != null )
+				return search(root.right, entry); // Look in right branch using overload
+			return null; // If right is null, it doesn't exist
+		}
 		
-		return search(root.left, entry); // Look in left branch using overload
+		if (root.left != null)
+			return search(root.left, entry); // Look in left branch using overload
+		return null; // If left is null, it doesn't exist
 	}
 
 	/**
@@ -224,10 +229,15 @@ public class BSTree<E extends Comparable<? super E>>
 			return node; // Success, node matches
 		}
 
-		if (entry.compareTo(node.value) > 0)
-			return search(node.right, entry); // Recursively search right branch
+		if (entry.compareTo(node.value) > 0) { // Check if entry is larger than root value
+			if (node.right != null )
+				return search(node.right, entry); // Look in right branch using recursion
+			return null; // If right is null, it doesn't exist
+		}
 		
-		return search(node.left, entry); // Recursively search left branch
+		if (node.left != null)
+			return search(node.left, entry); // Look in left branch using recursion
+		return null; // If left is null, it doesn't exist
 	}
 
 	/**
