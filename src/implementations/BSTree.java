@@ -181,7 +181,41 @@ public class BSTree<E extends Comparable<? super E>>
 	public BSTreeNode<E> search( E entry )
 			throws NullPointerException 
 	{
-		return root;
+		if (entry == null) throw new NullPointerException("Cannot search for null values!");
+
+		if (entry == root.value) {
+			return root; // Success, root matches
+		}
+
+		if (entry > root.value) // Check if entry is larger than root value
+			return search(root.right, entry); // Look in right branch using overload
+		
+		return search(root.left, entry); // Look in left branch using overload
+	}
+
+	/**
+	 * Uses recursion to retrieves a node from the tree given the object to search for.
+	 * 
+	 * @param entry element object being searched
+	 * @return the node with the element located in tree, null if not found
+	 * @throws NullPointerException if the element being passed in is null
+	 * @author TerrellAW
+	 * @version 1.0
+	 */
+	@Override
+	public BSTreeNode<E> search( BSTreeNode node, E entry )
+			throws NullPointerException 
+	{
+		if (entry == null) throw new NullPointerException("Cannot search for null values!");
+
+		if (entry == node.value) {
+			return node; // Success, node matches
+		}
+
+		if (entry > node.value)
+			return search(node.right, entry); // Recursively search right branch
+		
+		return search(node.left, entry); // Recursively search left branch
 	}
 
 	/**
