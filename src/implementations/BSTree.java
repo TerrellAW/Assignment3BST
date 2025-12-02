@@ -31,6 +31,8 @@ public class BSTree<E extends Comparable<? super E>>
 	 * Constructs the Binary Search Tree.
 	 *
 	 * @return Instance of the <code>BSTree</code> class.
+	 * @author TerrellAW
+	 * @version 1.0
 	 */
 	public BSTree() {
 		this.root = null;
@@ -43,6 +45,8 @@ public class BSTree<E extends Comparable<? super E>>
 	 * 
 	 * @return node stored at the root of tree is returned
 	 * @throws NullPointerException if the tree is empty and there is no root node.
+	 * @author TerrellAW
+	 * @version 1.0
 	 */
 	public BSTreeNode<E> getRoot()
 			throws NullPointerException
@@ -58,6 +62,8 @@ public class BSTree<E extends Comparable<? super E>>
 	 * value.
 	 * 
 	 * @return the height of the tree.
+	 * @author TerrellAW
+	 * @version 1.0
 	 */
 	public int getHeight()
 	{
@@ -69,6 +75,8 @@ public class BSTree<E extends Comparable<? super E>>
 	 * is returned.
 	 * 
 	 * @return number of elements currently stored in tree.
+	 * @author TerrellAW
+	 * @version 1.0
 	 */
 	public int size()
 	{
@@ -79,6 +87,8 @@ public class BSTree<E extends Comparable<? super E>>
 	 * Maximum between two integers.
 	 *
 	 * @return larger of two given integers.
+	 * @author TerrellAW
+	 * @version 1.0
 	 */
 	int max(int a, int b) {
 		return (a > b) ? a : b;
@@ -86,6 +96,9 @@ public class BSTree<E extends Comparable<? super E>>
 
 	/**
 	 * Calculates and updates the height of node and its children.
+	 *
+	 * @author TerrellAW
+	 * @version 1.0
 	 */
 	private void updateHeights(BSTreeNode<E> node) {
 		if (node == null) return; // Can't update if no nodes
@@ -102,6 +115,8 @@ public class BSTree<E extends Comparable<? super E>>
 	 * Checks if the tree is currently empty.
 	 * 
 	 * @return returns boolean true if the tree is empty otherwise false.
+	 * @author TerrellAW
+	 * @version 1.0
 	 */
 	public boolean isEmpty()
 	{
@@ -113,6 +128,9 @@ public class BSTree<E extends Comparable<? super E>>
 
 	/**
 	 * Clears all elements currently stored in tree and makes the tree empty.
+	 *
+	 * @author TerrellAW
+	 * @version 1.0
 	 */
 	public void clear()
 	{
@@ -157,6 +175,8 @@ public class BSTree<E extends Comparable<? super E>>
 	 * @param entry element object being searched
 	 * @return the node with the element located in tree, null if not found
 	 * @throws NullPointerException if the element being passed in is null
+	 * @author TerrellAW
+	 * @version 1.0
 	 */
 	public BSTreeNode<E> search( E entry )
 			throws NullPointerException 
@@ -170,6 +190,8 @@ public class BSTree<E extends Comparable<? super E>>
 	 * @param node the starting point 
 	 * @param newEntry the element being added.
 	 * @return true if added successfully, false if duplicate
+	 * @author TerrellAW
+	 * @version 1.0
 	 */
 	private boolean insert(BSTreeNode<E> node, E newEntry) {
 		int comparison = newEntry.compareTo(node.value);
@@ -199,6 +221,8 @@ public class BSTree<E extends Comparable<? super E>>
 	 * @param newEntry the element being added to the tree
 	 * @return a boolean true if the element is added successfully else false
 	 * @throws NullPointerException if the element being passed in is null
+	 * @author TerrellAW
+	 * @version 1.0
 	 */
 	public boolean add( E newEntry )
 			throws NullPointerException 
@@ -245,7 +269,7 @@ public class BSTree<E extends Comparable<? super E>>
 		//deletes the node.
 		cursor = null;
 		this.count--;
-		// TODO: Figure out if height should decrease
+		updateHeights(root);
 		return removed;
 	}
 
@@ -270,7 +294,7 @@ public class BSTree<E extends Comparable<? super E>>
 		//deletes the node.
 		cursor = null;
 		this.count--;
-		// TODO: Figure out if height should decrease
+		updateHeights(root);
 		return removed;
 	}
 
