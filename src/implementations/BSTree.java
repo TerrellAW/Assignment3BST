@@ -41,6 +41,19 @@ public class BSTree<E extends Comparable<? super E>>
 	}
 
 	/**
+	 * Parameterized overload of constructor.
+	 *
+	 * @return Instance of the <code>BSTree</code> class.
+	 * @author TerrellAW
+	 * @version 1.0
+	 */
+	public BSTree( E value ) {
+		this.root = new BSTreeNode(value);
+		this.height = 1;
+		this.count = 1;
+	}
+
+	/**
 	 * The node at the root of the Binary Search Tree will be returned.
 	 * 
 	 * @return node stored at the root of tree is returned
@@ -183,11 +196,11 @@ public class BSTree<E extends Comparable<? super E>>
 	{
 		if (entry == null) throw new NullPointerException("Cannot search for null values!");
 
-		if (entry == root.value) {
+		if (entry.equals(root.value)) {
 			return root; // Success, root matches
 		}
 
-		if (entry > root.value) // Check if entry is larger than root value
+		if (entry.compareTo(root.value) > 0) // Check if entry is larger than root value
 			return search(root.right, entry); // Look in right branch using overload
 		
 		return search(root.left, entry); // Look in left branch using overload
@@ -202,17 +215,16 @@ public class BSTree<E extends Comparable<? super E>>
 	 * @author TerrellAW
 	 * @version 1.0
 	 */
-	@Override
-	public BSTreeNode<E> search( BSTreeNode node, E entry )
+	public BSTreeNode<E> search( BSTreeNode<E> node, E entry )
 			throws NullPointerException 
 	{
 		if (entry == null) throw new NullPointerException("Cannot search for null values!");
 
-		if (entry == node.value) {
+		if (entry.equals(node.value)) {
 			return node; // Success, node matches
 		}
 
-		if (entry > node.value)
+		if (entry.compareTo(node.value) > 0)
 			return search(node.right, entry); // Recursively search right branch
 		
 		return search(node.left, entry); // Recursively search left branch
