@@ -85,6 +85,20 @@ public class BSTree<E extends Comparable<? super E>>
 	}
 
 	/**
+	 * Calculates and updates the height of node and its children.
+	 */
+	private void updateHeights(BSTreeNode<E> node) {
+		if (node == null) return; // Can't update if no nodes
+
+		updateHeights(node.left); // Recursively handle all left nodes
+		updateHeights(node.right); // Recursively handle all right nodes
+
+		node.height = 1 + max(node.left != null ? node.left.height : 0,
+							  node.right != null ? node.right.height : 0); // Update each node's height
+		this.height = root.height; // Apply final height of tree
+	}
+
+	/**
 	 * Checks if the tree is currently empty.
 	 * 
 	 * @return returns boolean true if the tree is empty otherwise false.
@@ -151,6 +165,34 @@ public class BSTree<E extends Comparable<? super E>>
 	}
 
 	/**
+	 * Recursively inserts a node.
+	 *
+	 * @param node the starting point 
+	 * @param newEntry the element being added.
+	 * @return true if added successfully, false if duplicate
+	 */
+	private boolean insert(BSTreeNode<E> node, E newEntry) {
+		int comparison = newEntry.compareTo(node.value);
+		
+		// Check if newEntry comes before the value of node
+		if (comparison < 0) {
+			if (node.left != null) {
+				return insert(node.left, newEntry); // Go to next node
+			}
+			node.left = new BSTreeNode<E>(newEntry);
+			return true; // Success
+		// Check if newEntry comes after the value of node
+		} else if (comparison > 0) {
+			if (node.right != null) {
+				return insert(node.right, newEntry); // Go to next node
+			}
+			node.right = new BSTreeNode<E>(newEntry);
+			return true; // Success
+		}
+		return false; // Duplicate found
+	}
+
+	/**
 	 * Adds a new element to the tree according to the natural ordering established
 	 * by the Comparable implementation.
 	 * 
@@ -159,7 +201,7 @@ public class BSTree<E extends Comparable<? super E>>
 	 * @throws NullPointerException if the element being passed in is null
 	 */
 	public boolean add( E newEntry )
-			throws NullPointerException // TODO: Redo all of this for when root.left/right are not empty, use iterators
+			throws NullPointerException 
 	{
 		// Null pointer if newEntry is null
 		if (newEntry == null)
@@ -168,48 +210,17 @@ public class BSTree<E extends Comparable<? super E>>
 		// Create root if one does not exist
 		if (isEmpty()) {
 			this.root = new BSTreeNode<E>(newEntry);
-			this.height++;
 			this.count++;
-			return true;
+			this.height++;
+			return true; // Success
 		}
 
-		// Check if newEntry comes before the value of root
-		if (newEntry.compareTo(root.value) < 0) {
-			root.left = new BSTreeNode<E>(newEntry);
-			this.height++;
+		boolean added = insert(root, newEntry);
+		if (added) {
 			this.count++;
-		} else if (newEntry.compareTo(root.value) > 0) {
-			root.right = new BSTreeNode<E>(newEntry);
-			this.height++;
-			this.count++;
+			updateHeights(root);
 		}
-
-		// Raise height of root to max
-		root.height = 1 + max((root.left.height), (root.right.height));
-
-		// Get balance
-		//int balance = getBalance(root);
-
-		// Left left
-		//if (balance > 1 && newEntry.compareTo(root.value) < 0)
-		//	rightRotate(root); // TODO: Implement this
-
-		// Right right
-		//else if (balance < -1 && newEntry.compareTo(root.value) > 0)
-		//	leftRotate(root); // TODO: Implement this
-		// Left right
-		//else if (balance > 1 && newEntry.compareTo(root.left.value) > 0) {
-		//	leftRotate(root.left); // TODO: Implement this
-		//	rightRotate(root); // TODO: Implement this
-		//}
-
-		// Right left
-		//else if (balance < -1 && newEntry.compareTo(root.right.value) < 0) {
-		//	rightRotate(root.right); // TODO: Implement this
-		//	leftRotate(root); // TODO: Implement this
-		//}
-
-		return true;
+		return added;
 	}
 
 	/**
@@ -233,6 +244,8 @@ public class BSTree<E extends Comparable<? super E>>
 		BSTreeNode<E> removed = cursor;
 		//deletes the node.
 		cursor = null;
+		this.count--;
+		// TODO: Figure out if height should decrease
 		return removed;
 	}
 
@@ -256,6 +269,8 @@ public class BSTree<E extends Comparable<? super E>>
 		BSTreeNode<E> removed = cursor;
 		//deletes the node.
 		cursor = null;
+		this.count--;
+		// TODO: Figure out if height should decrease
 		return removed;
 	}
 
@@ -298,6 +313,5 @@ public class BSTree<E extends Comparable<? super E>>
 	{
 		return new PostorderIterator<E>(getRoot());
 	}
-	
 }
 
