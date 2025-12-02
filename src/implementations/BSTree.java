@@ -316,7 +316,7 @@ public class BSTree<E extends Comparable<? super E>>
 		//gets the root
 		BSTreeNode<E> cursor = getRoot();
 		//traverse to the leftmost element.
-		while(cursor != null) 
+		while(cursor.left != null) 
 		{
 			cursor = cursor.left;
 		}
@@ -342,7 +342,7 @@ public class BSTree<E extends Comparable<? super E>>
 		//gets the root
 		BSTreeNode<E> cursor = getRoot();
 		//traverse to the rightmost element.
-		while(cursor != null) {
+		while(cursor.right != null) {
 			cursor = cursor.right;
 		}
 		//saves the node into a variable.
