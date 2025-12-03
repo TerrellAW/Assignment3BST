@@ -315,15 +315,28 @@ public class BSTree<E extends Comparable<? super E>>
 		if(this.root == null || this.count == 0) return null;
 		//gets the root
 		BSTreeNode<E> cursor = getRoot();
+		BSTreeNode<E> parent = null;
 		//traverse to the leftmost element.
-		while(cursor.left != null) 
-		{
+		while(cursor.left != null) {
+			parent = cursor;
 			cursor = cursor.left;
 		}
-		//saves the node
+		//saves the node into a variable.
 		BSTreeNode<E> removed = cursor;
-		//deletes the node.
-		cursor = null;
+		//if the root is the minimum value.
+		if(parent == null) {
+			this.root = cursor.left;
+		}
+		//if the maximum value has a right tree.
+		else if(cursor.right != null) {
+			parent.left = cursor.right;
+		}
+		//else the maximum value is a leaf.
+		else
+		{
+			//deletes the node.
+			parent.left = null;
+		}
 		this.count--;
 		updateHeights(root);
 		return removed;
@@ -341,14 +354,28 @@ public class BSTree<E extends Comparable<? super E>>
 		if(this.root == null || this.count == 0) return null;
 		//gets the root
 		BSTreeNode<E> cursor = getRoot();
+		BSTreeNode<E> parent = null;
 		//traverse to the rightmost element.
 		while(cursor.right != null) {
+			parent = cursor;
 			cursor = cursor.right;
 		}
 		//saves the node into a variable.
 		BSTreeNode<E> removed = cursor;
-		//deletes the node.
-		cursor = null;
+		//if the root is the maximum value.
+		if(parent == null) {
+			this.root = cursor.left;
+		}
+		//if the maximum value has a left tree.
+		else if(cursor.left != null) {
+			parent.right = cursor.left;
+		}
+		//else the maximum value is a leaf.
+		else
+		{
+			//deletes the node.
+			parent.right = null;
+		}
 		this.count--;
 		updateHeights(root);
 		return removed;
