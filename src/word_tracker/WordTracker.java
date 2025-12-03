@@ -39,9 +39,13 @@ public class WordTracker {
 	static String outputFile = null;
 	
 	public static void main(String[] args) throws IOException {
-			System.out.print("HEHEH");
-			//1-parse arguments 
-			
+		
+			//safety check
+			if (args.length < 2) {
+				System.out.println("program crashed because you did not supply valid/enough arguments \n \n");
+				throw new IllegalArgumentException("usage java -jar WordTracker.jar <input.txt> -pf/-pl/-po [-f<output.txt>]");
+			}
+			//1-parse arguments 			
 			File f = new File(args[0]);
 			if(!f.exists() || f.isDirectory()) {
 				throw new NullPointerException("File does not exist or is a directory!");
