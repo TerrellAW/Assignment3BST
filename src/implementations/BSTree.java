@@ -194,12 +194,16 @@ public class BSTree<E extends Comparable<? super E>>
 	public BSTreeNode<E> search( E entry )
 			throws NullPointerException 
 	{
+		
+		//empty tree safety check
+		if (root == null) throw new NullPointerException("Tree is empty!");
+		
 		if (entry == null) throw new NullPointerException("Cannot search for null values!");
 
 		if (entry.equals(root.value)) {
 			return root; // Success, root matches
 		}
-
+		
 		if (entry.compareTo(root.value) > 0) { // Check if entry is larger than root value
 			if (root.right != null )
 				return search(root.right, entry); // Look in right branch using overload
