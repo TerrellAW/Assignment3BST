@@ -14,3 +14,14 @@
 
 # Swap files
 *.swp
+
+# output
+out/
+test.txt
+MANIFEST.MF
+WordTracker.jar
+build_and_run.bat
+
+
+#serialized file
+repository.ser

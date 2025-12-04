@@ -1,5 +1,7 @@
 package implementations;
 
+import java.io.Serializable;
+
 import utilities.BSTreeADT;
 import utilities.Iterator;
 
@@ -14,6 +16,9 @@ import utilities.Iterator;
 public class BSTree<E extends Comparable<? super E>>
 	implements BSTreeADT<E>
 {
+	
+	
+	
 	/**
 	 * Root node of <code>BSTree</code>.
 	 */
@@ -195,11 +200,15 @@ public class BSTree<E extends Comparable<? super E>>
 			throws NullPointerException 
 	{
 		
-		//empty tree safety check
-		if (root == null) throw new NullPointerException("Tree is empty!");
+		
 		
 		if (entry == null) throw new NullPointerException("Cannot search for null values!");
 
+		
+		//return null instead of throwing an exception which is crashing the wordtracker app
+		if (root == null)
+			return null;
+		
 		if (entry.equals(root.value)) {
 			return root; // Success, root matches
 		}
