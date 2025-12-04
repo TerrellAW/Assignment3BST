@@ -11,14 +11,17 @@ import utilities.Iterator;
  * @param <E> The type of elements this list holds.
  * @author TerrellAW
  * @author Estefano Campana
+ * @author Youssif Al-Halawche
  * @version 1.0
  */
 public class BSTree<E extends Comparable<? super E>>
-	implements BSTreeADT<E>
+	implements BSTreeADT<E>, Serializable
 {
-	
-	
-	
+
+	/**
+	 * Serialize Id
+	 */
+	private static final long serialVersionUID = -2523314406863699048L;
 	/**
 	 * Root node of <code>BSTree</code>.
 	 */

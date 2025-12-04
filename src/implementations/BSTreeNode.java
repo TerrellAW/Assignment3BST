@@ -1,15 +1,23 @@
 package implementations;
 
+import java.io.Serializable;
+
 /**
  * Node that stores a value in a data structure.
  * 
  * @param <E> The type of elements this list holds.
  * @author TerrellAW
+ * @author Youssif Al-Halawche
  * @version 1.0
  */
-public class BSTreeNode<E>
+public class BSTreeNode<E> implements Serializable
 {
 	/**
+	 *  Serialize Id
+	 */
+	private static final long serialVersionUID = 8405078044740114276L;
+	/**
+	 * 
 	 * Height of the node.
 	 */
 	int height;

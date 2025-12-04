@@ -16,7 +16,6 @@ import implementations.BSTreeNode;
 import utilities.Iterator;
 
 public class WordTracker {
-	
 
 	/**
 	 * this program will only have 3 output modes this enum is used to set the
@@ -33,7 +32,6 @@ public class WordTracker {
 	// output file path, incase user used the third optional argument
 	static String outputFile = null;
 
-	
 	/**
 	 * Entry point of the program
 	 * 
@@ -57,15 +55,12 @@ public class WordTracker {
 		switch (args[1].toString()) {
 		case "-pf":
 			outputmode = OutputMode.PF;
-			System.out.print("pf");
 			break;
 		case "-pl":
 			outputmode = OutputMode.PL;
-			System.out.print("pl");
 			break;
 		case "-po":
 			outputmode = OutputMode.PO;
-			System.out.print("po");
 			break;
 		default:
 			throw new IllegalArgumentException("Invalid Option: " + args[1].toString());
@@ -111,6 +106,7 @@ public class WordTracker {
 	 * @param tree       the binary search tree containing all WordRecord objects
 	 * @param outputmode an enum value representing the desired formatting mode
 	 * @return returns the formatted string representing the full report
+	 * @author Youssif Al-Halawche
 	 */
 	private static String generateReport(BSTree<WordRecord> tree, OutputMode outputmode) {
 
